@@ -1,4 +1,4 @@
-2020-06-18-목: 1.1 ~ 1.2
+> 2020-06-18-점심시간
 
 # Node.js 교과서
 
@@ -44,5 +44,81 @@ CPU 부하가 큰 작업에는 적합하지 않다.
 
 안정성, 보안성은 충분히 검증됐다.
 
+> 2020-07-03-점심시간
 
+## 3 노드 기능 알아보기
+
+### 3.7 이벤트 이해하기
+
+어떤 이름의 이벤트가 발생할 때 콜백 함수를 호출하도록 이벤트를 등록할 수 있다.
+
+- `on`, `addListener` : 이벤트 이름, 콜백 함수를 연결해서 이벤트를 만든다
+- `emit` : 이벤트를 호출한다
+- `once` : 한 번만 실행되는 이벤트를 만든다
+- `off`, `removeListener` : 이벤트에 연결된 리스너를 제거한다
+- `listenerCount` : 연결된 리스너 개수를 확인한다
+
+### 3.8 예외 처리하기
+
+노드는 단일 스레드 방식이므로 에러가 발생하면 전체 서버가 멈춘다.
+
+예측 가능한 에러는 `try-catch` 문으로 처리한다.
+
+```javascript
+try { ... } catch (error) { ... }
+```
+
+예측 불가능한 에러는 다음과 같이 걸러낼 수 있지만 최후의 수단이다.
+
+```javascript
+process.on('uncaughtException', (error) => {
+  console.error('Uncaught Exception:', error);
+  process.exit();	// 이 이벤트 발생 후 다음 동작이 제대로 동작하는지 보증할 수 없다
+});
+```
+
+서버 운영은 에러와의 싸움이다. 미처 대비하지 못한 에러도 철저히 기록해서 보완해 나가야 한다.
+
+## 4 http 모듈로 웹 서버 만들기
+
+### 4.1 요청과 응답 이해하기
+
+```javascript
+const http = require('http');
+
+const server = http.createServer((req, res) => {
+  res.write('<h1>Hello Node!</h1>');
+  res.end('<p>Hello Server!</p>');
+});
+server.listen(8080);
+server.on('listening', () => {
+  console.log('Server is listening on port 8080');
+});
+server.on('error', (rror) => {
+  console.error(error);
+});
+
+```
+
+리눅스, macOS 에서 1024 이하의 포트에 연결하려면 관리자 권한이 필요하다.
+
+### 4.2 쿠키와 세션 이해하기
+
+누가 요청을 보내는지 알기 위해서 쿠키와 세션을 알아야 한다.
+
+1. 클라이언트의 첫 번째 요청
+2. 서버의 쿠키가 추가된 첫 번째 응답
+   `res.writeHead(200, {'Set-Cookie': 'mycooki=test' });`
+3. 이후 클라이언트는 쿠키를 포함해서 요청
+4. 서버는 쿠키 추가하지 않고 그대로 응답
+
+favicon에 대한 정보가 없으면 브라우저에서 추가로 `/favicon.ico` 를 요청한다.
+
+### 4.3 REST API와 라우팅
+
+REST API의 HTTP 요청 메서드: get, post, put, patch, delete
+
+요청이 어떤 메서드를 사용했는지 `req.method` 값으로 알 수 있다.
+
+(4.4 https와 http2 읽을 차례)
 
