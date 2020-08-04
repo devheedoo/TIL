@@ -7,7 +7,6 @@ Classes
 Inheritance
 
 - Before we access a property on `this` in a constructor body, we have to call `super()`
-- 
 
 Public, private, and protected modifiers
 
