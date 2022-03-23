@@ -48,3 +48,8 @@ export default {
 - `<button @click="room.rCount++">신고</button> <span>{{ room.rCount }}</span>`
 - 기명 함수를 만드려면 export default 객체에 `methods: {}` 생성해서 안에서 정의
 - 함수 안에서 data 호출할 때는 `this.데이터명`
+
+## 5강: Modal 만들기
+
+- 동적인 UI를 만들 때는 첫 상태를 저장해놓고, 그걸 보여주도록 작성
+- `v-if` 속성값이 true면 해당 컴포넌트가 나타나고, false면 사라짐
