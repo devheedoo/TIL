@@ -41,3 +41,10 @@ export default {
 ## 3강: v-for
 
 - `<a v-for="menu in menus" :key="menu.id">{{ menu.name }}</a>`
+
+## 4강: 이벤트 핸들러
+
+- event명 앞에 `@` prefix 추가해서 함수 호출
+- `<button @click="room.rCount++">신고</button> <span>{{ room.rCount }}</span>`
+- 기명 함수를 만드려면 export default 객체에 `methods: {}` 생성해서 안에서 정의
+- 함수 안에서 data 호출할 때는 `this.데이터명`
