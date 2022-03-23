@@ -53,3 +53,7 @@ export default {
 
 - 동적인 UI를 만들 때는 첫 상태를 저장해놓고, 그걸 보여주도록 작성
 - `v-if` 속성값이 true면 해당 컴포넌트가 나타나고, false면 사라짐
+
+## 6강: 데이터 분리
+
+- import, export (default)
